@@ -1,0 +1,9 @@
+# macOS
+.DS_Store
+*.xcuserstate
+
+# Compilación
+build/
+dist/
+build.log*
+*.app

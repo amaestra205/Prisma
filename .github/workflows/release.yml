@@ -1,0 +1,35 @@
+name: Compilar y publicar
+
+on:
+  push:
+    branches: [main]
+    tags: ['v*']
+  pull_request:
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  build:
+    runs-on: macos-26
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Compilar y empaquetar
+        run: |
+          if [[ "$GITHUB_REF" == refs/tags/* ]]; then V="$GITHUB_REF_NAME"; else V=""; fi
+          scripts/package.sh $V
+
+      - name: Guardar el .zip como artefacto
+        uses: actions/upload-artifact@v4
+        with:
+          name: Prisma
+          path: dist/*.zip
+
+      - name: Publicar release (solo con tags v*)
+        if: startsWith(github.ref, 'refs/tags/v')
+        uses: softprops/action-gh-release@v2
+        with:
+          files: dist/*.zip
+          generate_release_notes: true
