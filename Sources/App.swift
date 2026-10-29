@@ -60,6 +60,14 @@ final class AppDelegate: NSObject, NSApplicationDelegate {
         NSApp.activate()
     }
 
+    /// Cierra el panel y lanza el desinstalador (el diálogo no puede mostrarse dentro del panel).
+    func uninstall() {
+        popover.performClose(nil)
+        DispatchQueue.main.async { [engine] in
+            MainActor.assumeIsolated { Uninstaller.confirmAndRun(engine: engine) }
+        }
+    }
+
     func applicationWillTerminate(_ notification: Notification) {
         engine.stopAll()
     }

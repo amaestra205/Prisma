@@ -65,6 +65,18 @@ struct MixerView: View {
                         if on { try? SMAppService.mainApp.register() } else { try? SMAppService.mainApp.unregister() }
                     }
                 Spacer()
+                Menu {
+                    Button("Desinstalar Prisma…", role: .destructive) {
+                        AppDelegate.shared.uninstall()
+                    }
+                } label: {
+                    Image(systemName: "ellipsis.circle")
+                }
+                .menuStyle(.button)
+                .buttonStyle(.borderless)
+                .menuIndicator(.hidden)
+                .fixedSize()
+                .help("Más opciones")
                 Button("Salir") { NSApp.terminate(nil) }
                     .controlSize(.small)
             }

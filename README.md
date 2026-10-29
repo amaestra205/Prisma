@@ -86,7 +86,21 @@ Haz clic en el icono de Prisma en la barra de menús (un punto que se abre en tr
 Si tienes muchos iconos y no ves el de Prisma (puede quedar tapado por el notch), abre Prisma
 otra vez desde Aplicaciones o Spotlight y se mostrará el panel.
 
-### Diagnóstico
+## Desinstalar
+
+Desde la app: panel de Prisma → botón **⋯** → **Desinstalar Prisma…**.
+Quita el inicio automático, tus ajustes y el permiso de audio, y manda la app a la Papelera.
+
+O desde la Terminal, en la carpeta del repositorio:
+
+```bash
+./uninstall.sh
+```
+
+Prisma no instala drivers ni nada en el sistema: sus dispositivos de audio son temporales
+y desaparecen al cerrarla, así que el audio de tu Mac queda exactamente como estaba.
+
+## Diagnóstico
 
 ```bash
 PRISMA_DEBUG=1 /Applications/Prisma.app/Contents/MacOS/Prisma
